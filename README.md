@@ -249,13 +249,13 @@ Closes #이슈번호
 
 | 이름 | 담당 REQ | 담당 테이블 |
 |------|----------|------------|
-| (PM) | REQ1, 전체 관리 | 스키마 설계 |
-| 팀원2 | REQ?? | 테이블명 |
-| 팀원3 | REQ?? | 테이블명 |
-| 팀원4 | REQ?? | 테이블명 |
-| 팀원5 | REQ?? | 테이블명 |
-| 팀원6 | REQ?? | 테이블명 |
-| 팀원7 | REQ?? | 테이블명 |
+| (PM) 신우림 | REQ1, REQ2, REQ3, REQ11, REQ13 | `price_history`, 스키마 통합·검수, 뷰/인덱스 |
+| 박나림 | REQ9①, REQ14 | `member`, `member_profile_history` |
+| 최보경 | REQ5①, REQ7④, REQ9② | `content` |
+| 조수민 | REQ8①, REQ12 | `subscription_plan` |
+| 이태영 | REQ5②, REQ8② | `subscription` |
+| 곽성은 | REQ6①, REQ7③ | `watch_history` |
+| 하지수 | REQ6②, REQ17, REQ18 | `billing` |
 
 ---
 

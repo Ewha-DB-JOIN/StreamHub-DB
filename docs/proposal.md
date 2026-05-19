@@ -61,18 +61,18 @@ HW2-1의 기본 스키마(`product`, `customer`, `store`, `sales`, `market_baske
 
 | 메뉴 | 기능 | 담당 |
 |------|------|------|
-| INSERT ① | 콘텐츠 등록 (제목, 장르, 가격 입력) | 최보경 |
-| INSERT ② | 구독 등록 (회원 ID, 플랜 ID 입력) | 이태영 |
-| SELECT ① | 장르 입력 → 해당 장르 콘텐츠 시청 통계 조회 (VIEW + JOIN) | 곽성은 |
-| SELECT ② | 회원 ID 입력 → 구독·결제 이력 조회 (VIEW + JOIN) | 하지수 |
-| SELECT ③ | 연도 입력 → 월별 구독 매출 합계 및 ARPU (GROUP BY) | 곽성은 |
-| SELECT ④ | 장르 입력 → 장르별 평균 시청시간 및 콘텐츠 수 (GROUP BY) | 최보경 |
-| UPDATE ① | 플랜 가격 변경 (플랜 ID, 새 가격 입력) — 트랜잭션 처리 | 조수민 |
-| UPDATE ② | 구독 플랜 변경 (구독 ID, 새 플랜 ID 입력) | 이태영 |
-| DELETE ① | 회원 탈퇴 (회원 ID 입력) | 박나림 |
-| DELETE ② | 콘텐츠 삭제 (콘텐츠 ID 입력) | 최보경 |
-| 분석 ① | [REQ13] 플랜 ID 입력 → 가격 변동 전후 매출 비교 분석 | 팀장(신우림) |
-| 분석 ② | [REQ14] 회원 ID 입력 → 인적사항 변경 전후 구독 매출 분석 | 박나림 |
+| INSERT ① | 콘텐츠 등록 (제목, 장르, 가격 입력) | 팀원3 |
+| INSERT ② | 구독 등록 (회원 ID, 플랜 ID 입력) | 팀원5 |
+| SELECT ① | 장르 입력 → 해당 장르 콘텐츠 시청 통계 조회 (VIEW + JOIN) | 팀원6 |
+| SELECT ② | 회원 ID 입력 → 구독·결제 이력 조회 (VIEW + JOIN) | 팀원7 |
+| SELECT ③ | 연도 입력 → 월별 구독 매출 합계 및 ARPU (GROUP BY) | 팀원6 |
+| SELECT ④ | 장르 입력 → 장르별 평균 시청시간 및 콘텐츠 수 (GROUP BY) | 팀원3 |
+| UPDATE ① | 플랜 가격 변경 (플랜 ID, 새 가격 입력) — 트랜잭션 처리 | 팀원4 |
+| UPDATE ② | 구독 플랜 변경 (구독 ID, 새 플랜 ID 입력) | 팀원5 |
+| DELETE ① | 회원 탈퇴 (회원 ID 입력) | 팀원2 |
+| DELETE ② | 콘텐츠 삭제 (콘텐츠 ID 입력) | 팀원3 |
+| 분석 ① | [REQ13] 플랜 ID 입력 → 가격 변동 전후 매출 비교 분석 | 팀장 |
+| 분석 ② | [REQ14] 회원 ID 입력 → 인적사항 변경 전후 구독 매출 분석 | 팀원2 |
 
 ---
 
@@ -81,12 +81,12 @@ HW2-1의 기본 스키마(`product`, `customer`, `store`, `sales`, `market_baske
 | 이름 | 담당 테이블 | 담당 메뉴 | 기타 |
 |------|------------|---------|------|
 | **팀장 신우림** | `price_history` | 분석① (REQ13) | 스키마 통합·검수, 뷰 2개·인덱스 작성, Main.java 메뉴 틀, SQL 3종 최종 정리·제출, README, 보고서 취합 |
-| 팀원 (박나림) | `member` + `member_profile_history` | DELETE① (회원 탈퇴), 분석② (REQ14) | 회원 인적사항 이력 관리 구현 |
-| 팀원 (최보경) | `content` | INSERT① (콘텐츠 등록), DELETE② (콘텐츠 삭제), SELECT④ (장르별 집계) | 초기 데이터 50건 |
-| 팀원 (조수민) | `subscription_plan` | UPDATE① (가격 변경, 트랜잭션) | REQ12 트랜잭션 처리 담당 |
-| 팀원 (이태영) | `subscription` | INSERT② (구독 등록), UPDATE② (플랜 변경) | region_snapshot 스냅샷 처리 |
-| 팀원 (곽성은) | `watch_history` | SELECT① (장르별 시청 통계, VIEW+JOIN), SELECT③ (월별 매출 집계) | billing 테이블 초기 데이터 지원 |
-| 팀원 (하지수) | `billing` | SELECT② (회원별 결제 이력, VIEW+JOIN) | PreparedStatement 전체 검수, .jar 빌드 |
+| 박나림 | `member` + `member_profile_history` | DELETE① (회원 탈퇴), 분석② (REQ14) | 회원 인적사항 이력 관리 구현, 발표자료 제작 |
+| 최보경 | `content` | INSERT① (콘텐츠 등록), DELETE② (콘텐츠 삭제), SELECT④ (장르별 집계) | 초기 데이터 50건, 데모 영상 제작 |
+| 조수민 | `subscription_plan` | UPDATE① (가격 변경, 트랜잭션) | REQ12 트랜잭션 처리 담당, 발표 |
+| 이태영 | `subscription` | INSERT② (구독 등록), UPDATE② (플랜 변경) | region_snapshot 스냅샷 처리, 발표 |
+| 곽성은 | `watch_history` | SELECT① (장르별 시청 통계, VIEW+JOIN), SELECT③ (월별 매출 집계) | billing 테이블 초기 데이터 지원, 발표자료 제작 |
+| 하지수 | `billing` | SELECT② (회원별 결제 이력, VIEW+JOIN) | PreparedStatement 전체 검수, .jar 빌드, 데모 영상 제작 |
 
 > ※ 모든 팀원은 본인 담당 메뉴에 PreparedStatement를 직접 적용 (REQ10)  
 > ※ 본인 담당 테이블의 SQL(createschema, initdata) 및 보고서 캡처를 각자 책임
@@ -103,7 +103,7 @@ HW2-1의 기본 스키마(`product`, `customer`, `store`, `sales`, `market_baske
 | 6/01 ~ 6/05 | SQL 작성 (createschema.sql, initdata.sql — 각자 담당 테이블) | 전원 |
 | 6/01 ~ 6/07 | Java 메뉴 구현 (각자 담당 REQ) | 전원 |
 | 6/07 | develop 브랜치 통합 및 통합 테스트 | 팀장 |
-| 6/08 | .jar 빌드, 보고서 초안 완성 | 히지수, 팀장 |
+| 6/08 | .jar 빌드, 보고서 초안 완성 | 팀원7, 팀장 |
 | **6/09** | **최종 제출 (cybercampus)** | 팀장 |
 | 6/10 | 발표 자료 및 데모 영상 준비 | 전원 |
 | **6/11** | **발표 및 데모** | 전원 |
