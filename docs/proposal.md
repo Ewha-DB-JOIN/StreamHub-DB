@@ -84,7 +84,7 @@ HW2-1의 기본 스키마(`product`, `customer`, `store`, `sales`, `market_baske
 | 팀원 (이름) | `member` + `member_profile_history` | DELETE① (회원 탈퇴), 분석② (REQ14) | 회원 인적사항 이력 관리 구현 |
 | 팀원 최보경 | `content` | INSERT① (콘텐츠 등록), DELETE② (콘텐츠 삭제), SELECT④ (장르별 집계) | 초기 데이터 50건 |
 | 팀원 (이름) | `subscription_plan` | UPDATE① (가격 변경, 트랜잭션) | REQ12 트랜잭션 처리 담당 |
-| 팀원 (이름) | `subscription` | INSERT② (구독 등록), UPDATE② (플랜 변경) | region_snapshot 스냅샷 처리 |
+| 팀원 이태영 | `subscription` | INSERT② (구독 등록), UPDATE② (플랜 변경) | region_snapshot 스냅샷 처리 |
 | 팀원 (이름) | `watch_history` | SELECT① (장르별 시청 통계, VIEW+JOIN), SELECT③ (월별 매출 집계) | billing 테이블 초기 데이터 지원 |
 | 팀원 (이름) | `billing` | SELECT② (회원별 결제 이력, VIEW+JOIN) | PreparedStatement 전체 검수, .jar 빌드 |
 
