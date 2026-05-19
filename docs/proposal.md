@@ -139,20 +139,20 @@ HW2-1의 기본 스키마(`product`, `customer`, `store`, `sales`, `market_baske
 | REQ1 | HW2-1 6개 테이블 → 8개 테이블로 도메인 확장 | 신우림 |
 | REQ2 | 테이블 8개 + 뷰 2개 (`genre_watch_stats_view`, `member_billing_summary_view`) | 신우림 |
 | REQ3 | 각 테이블 PK·FK 설정, 비PK 인덱스 추가 (`watch_history.content_id`, `billing.billing_date` 등) | 신우림 |
-| REQ4 | 각 팀원이 담당 테이블에 10~100 튜플 삽입 | 전원 (각자 담당 테이블) |
+| REQ4 | 각자 담당 테이블에 10~100 튜플 삽입 | ALL (각자 담당 테이블) |
 | REQ5 | INSERT ①② | 최보경①, 이태영② |
 | REQ6 | SELECT ①② (VIEW+JOIN+사용자입력) | 곽성은①, 하지수② |
 | REQ7 | SELECT ③④ (집계+GROUP BY+사용자입력) | 곽성은③, 최보경④ |
 | REQ8 | UPDATE ①② | 조수민①, 이태영② |
 | REQ9 | DELETE ①② | 박나림①, 최보경② |
-| REQ10 | 전원 PreparedStatement 적용 | 전원 |
+| REQ10 | PreparedStatement 적용 | ALL |
 | REQ11 | 뷰 2개 + 비PK 인덱스 createschema.sql에 포함 | 신우림 |
 | REQ12 | UPDATE① (가격 변경) 트랜잭션 처리 | 조수민 |
 | REQ13 | `price_history` + `billing.applied_price` 스냅샷 + 분석① 메뉴 | 신우림 |
 | REQ14 | `member_profile_history` + `subscription.region_snapshot` + 분석② 메뉴 | 박나림 |
 | REQ15 | `while-switch` 기반 텍스트 메뉴 (`Main.java`) | 신우림 |
 | REQ16 | `createschema.sql`, `initdata.sql`, `dropschema.sql` 3종 제출 | 신우림 (각자 SQL 통합) |
-| REQ17 | 전원 .java 소스코드 제출 | 전원 |
+| REQ17 | .java 소스코드 제출 | ALL |
 | REQ18 | 실행 가능한 `.jar` 파일 제출 | 하지수 |
 | REQ19 | `README.md` (실행 방법, 메인 클래스명 포함) | 신우림 |
-| REQ20 | ERD, 코드 구조 설명, 실행 캡처, REQ 충족 설명 포함 보고서 | 신우림 (취합), 전원 (캡처) |
+| REQ20 | ERD, 코드 구조 설명, 실행 캡처, REQ 충족 설명 포함 보고서 | 신우림 (취합), ALL (캡처) |
