@@ -1,6 +1,7 @@
 import util.DBUtil;
-
+import menu.BillingMenu;
 import java.util.Scanner;
+
 
 /**
  * 메인 진입점 - 텍스트 기반 메뉴
@@ -13,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         DBUtil db = DBUtil.getInstance();
+        BillingMenu billingMenu = new BillingMenu();
 
         while (true) {
             printMenu();
@@ -25,9 +27,8 @@ public class Main {
                     System.out.println("미구현");
                     break;
                 case 2:
-                    // TODO: [REQ??] 담당자: 이름
-                    // featureTwo();
-                    System.out.println("미구현");
+                    // TODO: [REQ6-2] 담당자: 하지수
+                    billingMenu.showMemberBillingHistory();
                     break;
                 case 3:
                     // TODO: [REQ??] 담당자: 이름
@@ -49,7 +50,7 @@ public class Main {
         System.out.println("  JOIN 프로젝트 메인 메뉴");
         System.out.println("=============================");
         System.out.println(" 1. 기능 1 (TODO)");
-        System.out.println(" 2. 기능 2 (TODO)");
+        System.out.println(" 2. 회원별 결제 이력 조회 [REQ6-2]");
         System.out.println(" 3. 기능 3 (TODO)");
         System.out.println(" 0. 종료");
         System.out.println("=============================");
