@@ -1,5 +1,8 @@
 import util.DBUtil;
 
+import menu.InsertSubscriptionMenu;
+import menu.UpdateSubscriptionPlanMenu;
+
 import java.util.Scanner;
 
 /**
@@ -20,14 +23,12 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // TODO: [REQ??] 담당자: 이름
-                    // featureOne();
-                    System.out.println("미구현");
+                    InsertSubscriptionMenu insertMenu = new InsertSubscriptionMenu();
+                    insertMenu.execute();
                     break;
                 case 2:
-                    // TODO: [REQ??] 담당자: 이름
-                    // featureTwo();
-                    System.out.println("미구현");
+                    UpdateSubscriptionPlanMenu updateMenu = new UpdateSubscriptionPlanMenu();
+                    updateMenu.execute();
                     break;
                 case 3:
                     // TODO: [REQ??] 담당자: 이름
@@ -48,8 +49,8 @@ public class Main {
         System.out.println("\n=============================");
         System.out.println("  JOIN 프로젝트 메인 메뉴");
         System.out.println("=============================");
-        System.out.println(" 1. 기능 1 (TODO)");
-        System.out.println(" 2. 기능 2 (TODO)");
+        System.out.println(" 1. 구독 등록");
+        System.out.println(" 2. 구독 플랜 변경");
         System.out.println(" 3. 기능 3 (TODO)");
         System.out.println(" 0. 종료");
         System.out.println("=============================");
