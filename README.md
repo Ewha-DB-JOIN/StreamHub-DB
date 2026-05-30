@@ -1,4 +1,4 @@
-# [팀명] Database Team Project
+# StreamHub — 온라인 동영상 스트리밍 구독 관리 시스템
 
 이화여대 데이터베이스 팀 프로젝트 — Java + JDBC + MySQL HeatWave
 
@@ -8,7 +8,7 @@
 
 | 항목 | 내용 |
 |------|------|
-| 주제 | (TBD - 팀 결정 후 작성) |
+| 주제 | **StreamHub** — 온라인 동영상 스트리밍 구독 관리 시스템 |
 | 제출 마감 | **2025-06-09 23:59** |
 | 제안서 마감 | **2025-05-30 23:59** |
 | 발표 | 2025-06-11 (수업 시간) |
@@ -29,31 +29,41 @@
 ## 시작하기
 
 ### 1. JDBC 드라이버
+
 `lib/` 폴더에 `mysql-connector-j-8.x.x.jar` 파일을 넣고 IDE classpath에 추가하세요.
-- 다운로드: https://dev.mysql.com/downloads/connector/j/ (Platform Independent 선택)
+
+- 다운로드: <https://dev.mysql.com/downloads/connector/j/> (Platform Independent 선택)
 
 ### 2. DB 연결 설정
+
 `src/util/DBUtil.java` 에서 본인 환경에 맞게 수정:
+
 ```java
 private static final String DB_URL  = "jdbc:mysql://<HOST>:3306/<DB_NAME>?useSSL=true&serverTimezone=Asia/Seoul";
 private static final String DB_USER = "your_mysql_user";
 private static final String DB_PASS = "your_mysql_password";
 ```
+
 > ⚠ DB 비밀번호는 절대 커밋하지 마세요. `DBUtil.java`는 로컬에서만 수정하세요.
 
 ### 3. DB 스키마 초기화
+
 MySQL Workbench 또는 CLI에서 순서대로 실행:
+
 ```
 1. sql/dropschema.sql    -- 기존 테이블 삭제 (⚠ 데이터 전부 삭제됨)
 2. sql/createschema.sql  -- 테이블 / 뷰 / 인덱스 생성
 3. sql/initdata.sql      -- 초기 데이터 삽입
 ```
+
 > ⚠ `USE DATABASE` 구문은 SQL 파일에 포함하지 않습니다 (제출 요건).
 
 ### 4. 실행
+
 ```bash
 java -jar join-app.jar
 ```
+
 또는 IDE에서 `src/Main.java`를 직접 실행하세요.
 
 ---
@@ -81,26 +91,26 @@ java -jar join-app.jar
 
 | REQ | 내용 | 담당 | 상태 |
 |-----|------|------|------|
-| REQ1 | HW2-1 스키마 확장 및 변경 | - | ⬜ |
-| REQ2 | 테이블 7개 이상 + 뷰 2개 | - | ⬜ |
-| REQ3 | FK, PK, 인덱스 포함 | - | ⬜ |
-| REQ4 | 각 테이블 10~100 튜플 | - | ⬜ |
-| REQ5 | INSERT 메뉴 2개 (사용자 입력) | - | ⬜ |
-| REQ6 | SELECT 메뉴 2개 (사용자 입력 + JOIN + VIEW) | - | ⬜ |
-| REQ7 | SELECT 메뉴 2개 (사용자 입력 + 집계 + GROUP BY) | - | ⬜ |
-| REQ8 | UPDATE 메뉴 2개 (사용자 입력) | - | ⬜ |
-| REQ9 | DELETE 메뉴 2개 (사용자 입력) | - | ⬜ |
-| REQ10 | PreparedStatement 사용 (사용자 입력 시) | - | ⬜ |
-| REQ11 | 스키마에 뷰 + 인덱스 포함 | - | ⬜ |
-| REQ12 | UPDATE 트랜잭션 처리 | - | ⬜ |
-| REQ13 | 상품 단가 변경 시 과거 매출 유지 + 분석 메뉴 | - | ⬜ |
-| REQ14 | 고객 정보 변경 시 변경 전후 매출 분석 메뉴 | - | ⬜ |
-| REQ15 | 텍스트 기반 UI | - | ⬜ |
-| REQ16 | SQL 스크립트 3종 제출 | - | ⬜ |
-| REQ17 | Java 소스코드 (.java) 제출 | - | ⬜ |
-| REQ18 | 실행 가능한 .jar 파일 제출 | - | ⬜ |
-| REQ19 | README (실행 방법, 메인 클래스명) | - | ⬜ |
-| REQ20 | 보고서 (ER다이어그램, 코드 설명, 실행 캡처, REQ 충족 설명) | - | ⬜ |
+| REQ1 | HW2-1 스키마 확장 및 변경 | 신우림 | ⬜ |
+| REQ2 | 테이블 7개 이상 + 뷰 2개 | 신우림 | ⬜ |
+| REQ3 | FK, PK, 인덱스 포함 | 신우림 | ⬜ |
+| REQ4 | 각 테이블 10~100 튜플 | 전원 (각자 담당 테이블) | ⬜ |
+| REQ5 | INSERT 메뉴 2개 (사용자 입력) | 최보경①, 이태영② | ⬜ |
+| REQ6 | SELECT 메뉴 2개 (사용자 입력 + JOIN + VIEW) | 곽성은①, 하지수② | ⬜ |
+| REQ7 | SELECT 메뉴 2개 (사용자 입력 + 집계 + GROUP BY) | 곽성은③, 최보경④ | ⬜ |
+| REQ8 | UPDATE 메뉴 2개 (사용자 입력) | 조수민①, 이태영② | ⬜ |
+| REQ9 | DELETE 메뉴 2개 (사용자 입력) | 박나림①, 최보경② | ⬜ |
+| REQ10 | PreparedStatement 사용 (사용자 입력 시) | 전원 | ⬜ |
+| REQ11 | 스키마에 뷰 + 인덱스 포함 | 신우림 | ⬜ |
+| REQ12 | UPDATE 트랜잭션 처리 | 조수민 | ⬜ |
+| REQ13 | 상품 단가 변경 시 과거 매출 유지 + 분석 메뉴 | 신우림 | ⬜ |
+| REQ14 | 고객 정보 변경 시 변경 전후 매출 분석 메뉴 | 박나림 | ⬜ |
+| REQ15 | 텍스트 기반 UI | 신우림 | ⬜ |
+| REQ16 | SQL 스크립트 3종 제출 | 신우림 (각자 담당 테이블 SQL 작성 후 통합) | ⬜ |
+| REQ17 | Java 소스코드 (.java) 제출 | 전원 | ⬜ |
+| REQ18 | 실행 가능한 .jar 파일 제출 | 하지수 | ⬜ |
+| REQ19 | README (실행 방법, 메인 클래스명) | 신우림 | ⬜ |
+| REQ20 | 보고서 (ER다이어그램, 코드 설명, 실행 캡처, REQ 충족 설명) | 신우림 (취합), 전원 (캡처) | ⬜ |
 
 ---
 
@@ -153,6 +163,7 @@ main       ← 최종 제출용 (PR + PM 승인 필수, 직접 push 금지)
 ```
 
 **작업 흐름:**
+
 ```bash
 # 1. develop 최신화
 git checkout develop && git pull origin develop
@@ -214,6 +225,7 @@ docs: 제안서 초안 추가
 ```
 
 예시:
+
 ```
 [feature/req05-insert] REQ5 상품 INSERT 메뉴 구현
 [develop] 초기 프로젝트 세팅 merge
@@ -249,20 +261,27 @@ Closes #이슈번호
 
 | 이름 | 담당 REQ | 담당 테이블 |
 |------|----------|------------|
-| (PM) | REQ1, 전체 관리 | 스키마 설계 |
-| 팀원2 | REQ?? | 테이블명 |
-| 팀원3 | REQ?? | 테이블명 |
-| 팀원4 | REQ?? | 테이블명 |
-| 팀원5 | REQ?? | 테이블명 |
-| 팀원6 | REQ?? | 테이블명 |
-| 팀원7 | REQ?? | 테이블명 |
+| 신우림 | REQ1, REQ2, REQ3, REQ11, REQ13 | `price_history` — 스키마 통합·검수, 뷰/인덱스, 보고서 취합 |
+| 박나림 | REQ9①, REQ14 | `member`, `member_profile_history` — 발표자료 제작 |
+| 최보경 | REQ5①, REQ7④, REQ9② | `content` — 데모 영상 제작 |
+| 조수민 | REQ8①, REQ12 | `subscription_plan` — 발표 |
+| 이태영 | REQ5②, REQ8② | `subscription` — 발표 |
+| 곽성은 | REQ6①, REQ7③ | `watch_history` — 발표자료 제작 |
+| 하지수 | REQ6②, REQ17, REQ18 | `billing` — .jar 빌드, 데모 영상 제작 |
 
 ---
 
 ## 주요 일정
 
-| 날짜 | 마일스톤 |
-|------|---------|
-| 2025-05-30 | 제안서 제출 (주제, 역할, 일정) |
-| 2025-06-09 | 최종 제출 (SQL, .java, .jar, README, 보고서) |
-| 2025-06-11 | 발표 및 데모 (영어 발표, 5분+) |
+| 날짜 | 마일스톤 | 담당 |
+|------|---------|------|
+| 5/18 ~ 5/23 | ERD 초안 확정, 테이블별 컬럼 상세 확정 | ALL |
+| 5/24 ~ 5/29 | 제안서 작성 및 검토 | ALL |
+| **2025-05-30** | **제안서 제출** | 신우림 |
+| 6/01 ~ 6/05 | SQL 작성 (createschema, initdata — 각자 담당 테이블) | ALL |
+| 6/01 ~ 6/07 | Java 메뉴 구현 (각자 담당 REQ) | ALL |
+| 6/07 | develop 브랜치 통합 및 통합 테스트 | 신우림 |
+| 6/08 | .jar 빌드, 보고서 초안 완성 | 하지수, 신우림 |
+| **2025-06-09** | **최종 제출 (SQL, .java, .jar, README, 보고서)** | 신우림 |
+| 6/10 | 발표자료 및 데모 영상 준비 | 박나림, 최보경, 곽성은, 하지수 |
+| **2025-06-11** | **발표 및 데모** | 이태영, 조수민 |
