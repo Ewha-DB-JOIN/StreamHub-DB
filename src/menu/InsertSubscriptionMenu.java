@@ -1,11 +1,7 @@
 package menu;
 
 import util.DBUtil;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class InsertSubscriptionMenu {
@@ -26,9 +22,10 @@ public class InsertSubscriptionMenu {
             conn.setAutoCommit(false);
 
             // 1. member 존재 확인 + region 조회
-            String region = getMemberRegion(conn, memberId);
-            if (region == null) {
-                System.out.println("존재하지 않는 member_id입니다.");
+            String region = getMemberregion(conn, memberId);
+
+            if (region == null || region.isBlank()) {
+                System.out.println("회원의 지역 정보가 없습니다.");
                 conn.rollback();
                 return;
             }
@@ -72,7 +69,7 @@ public class InsertSubscriptionMenu {
         }
     }
 
-    private String getMemberRegion(Connection conn, int memberId) throws SQLException {
+    private String getMemberregion(Connection conn, int memberId) throws SQLException {
         String sql = "SELECT region FROM member WHERE member_id = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
