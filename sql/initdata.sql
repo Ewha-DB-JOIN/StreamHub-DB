@@ -49,6 +49,7 @@ INSERT INTO price_history (plan_id, old_price, new_price, valid_from, valid_to, 
 -- [하지수] billing
 -- ------------------------------------------------------------
 
+
 -- [하지수] billing
 INSERT INTO billing (sub_id, billing_date, applied_price, total_amount) VALUES
 (1, '2026-01-01', 9900.00, 9900.00),
