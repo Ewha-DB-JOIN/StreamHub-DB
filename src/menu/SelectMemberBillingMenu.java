@@ -3,13 +3,14 @@ package menu;
 import util.DBUtil;
 import java.sql.*;
 import java.util.Scanner;
-
+import java.math.BigDecimal;
 /**
  * [REQ6②] SELECT② 회원별 구독·결제 이력 조회
  * 담당: 하지수
  * - 회원 ID 입력 → member_billing_summary_view 조회
  * - VIEW + JOIN 사용 [REQ6]
  * - PreparedStatement 사용 [REQ10]
+ * - 결과: 회원별 구독 이력, 플랜명, 구독 기간, 상태, 지역, 총 결제액 출력
  */
 public class SelectMemberBillingMenu {
 
@@ -37,23 +38,26 @@ public class SelectMemberBillingMenu {
             pstmt.setInt(1, memberId);
 
             try (ResultSet rs = pstmt.executeQuery()) {
-                System.out.println("\n==============================================================================================");
-                System.out.println("                              회원별 구독·결제 이력 조회");
-                System.out.println("==============================================================================================");
+                System.out.println("\n==============================================================================================================");
+                System.out.println("                                      회원별 구독·결제 이력 조회");
+                System.out.println("==============================================================================================================");
+
                 System.out.printf(
                         "%-8s %-10s %-25s %-8s %-15s %-12s %-12s %-10s %-10s %-12s%n",
                         "회원ID", "이름", "이메일", "구독ID", "플랜명",
                         "시작일", "종료일", "상태", "지역", "총결제액"
                 );
 
-                System.out.println("----------------------------------------------------------------------------------------------");
+                System.out.println("--------------------------------------------------------------------------------------------------------------");
 
                 boolean found = false;
 
                 while (rs.next()) {
                     found = true;
 
+                    Date startDate = rs.getDate("start_date");
                     Date endDate = rs.getDate("end_date");
+                    BigDecimal totalBilled = rs.getBigDecimal("total_billed");
 
                     System.out.printf(
                             "%-8d %-10s %-25s %-8d %-15s %-12s %-12s %-10s %-10s %-12.2f%n",
@@ -62,11 +66,11 @@ public class SelectMemberBillingMenu {
                             rs.getString("email"),
                             rs.getInt("sub_id"),
                             rs.getString("plan_name"),
-                            rs.getDate("start_date"),
+                            startDate == null ? "NULL" : startDate.toString(),
                             endDate == null ? "NULL" : endDate.toString(),
                             rs.getString("status"),
                             rs.getString("region_snapshot"),
-                            rs.getBigDecimal("total_billed").doubleValue()
+                            totalBilled == null ? 0.0 : totalBilled.doubleValue()
                     );
                 }
 
