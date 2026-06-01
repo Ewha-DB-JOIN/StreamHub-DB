@@ -3,6 +3,7 @@ import util.DBUtil;
 
 import java.util.Scanner;
 
+
 /**
  * [REQ15] 메인 진입점 — 텍스트 기반 while-switch 메뉴
  * 담당: 신우림 (Task 3.1.2 / Task 3.2.13)
@@ -13,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         DBUtil db = DBUtil.getInstance();
+
 
         // TODO [Task 3.2.13 신우림]: 각 메뉴 인스턴스 생성 후 아래 case에 run() 연결
         InsertContentMenu        insertContent        = new InsertContentMenu();
