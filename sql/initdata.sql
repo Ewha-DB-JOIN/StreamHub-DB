@@ -54,6 +54,37 @@ INSERT INTO content (title, genre, release_date, unit_price, description) VALUES
 ('Your Name', 'Animation', '2016-08-26', 7.99, 'Two teenagers mysteriously swap bodies'),
 ('The First Slam Dunk', 'Animation', '2023-01-04', 7.99, 'Theatrical film based on the Slam Dunk manga');
 
+
+-- ------------------------------------------------------------
+-- [박나림] member, member_profile_history
+-- [최보경] content
+-- [조수민] subscription_plan
+-- [이태영] subscription
+-- [곽성은] watch_history  /  billing 지원
+-- [하지수] billing
+-- ------------------------------------------------------------
+
+
+-- [박나림] member
+INSERT INTO member (name, email, birth_date, region) VALUES
+('김민준', 'minjun@email.com', '1990-03-15', 'Seoul'),
+('이서연', 'seoyeon@email.com', '1995-07-22', 'Busan'),
+('박지훈', 'jihoon@email.com', '1988-11-30', 'Incheon'),
+('최수아', 'sua@email.com', '1992-05-18', 'Daegu'),
+('정예준', 'yejun@email.com', '1998-01-09', 'Gwangju'),
+('강지민', 'jimin@email.com', '1993-08-25', 'Seoul'),
+('윤하은', 'haeun@email.com', '1996-04-12', 'Busan'),
+('임도현', 'dohyeon@email.com', '1991-12-03', 'Seoul'),
+('한소율', 'soyul@email.com', '1997-09-17', 'Daejeon'),
+('오지우', 'jiwoo@email.com', '1994-06-28', 'Seoul');
+
+-- [조수민] subscription_plan
+INSERT INTO subscription_plan (plan_name, current_price, max_devices, ads_included) VALUES
+('광고형 베이직', 9900.00, 1, TRUE),
+('스탠다드', 13900.00, 2, FALSE),
+('프리미엄', 17900.00, 4, FALSE),
+('패밀리', 21900.00, 6, FALSE);
+
 -- ------------------------------------------------------------
 -- [신우림] price_history (REQ13용, 15 tuples)
 -- plan_id 1~4 는 조수민 담당 subscription_plan 데이터 기준
@@ -86,17 +117,45 @@ INSERT INTO price_history (plan_id, old_price, new_price, valid_from, valid_to, 
 (3, 12900.00, 14900.00, '2021-01-01 00:00:00', '2022-03-01 00:00:00', '2021-01-01 09:00:00'),
 (4, 15900.00, 17900.00, '2021-01-01 00:00:00', '2022-09-01 00:00:00', '2021-01-01 09:00:00');
 
--- ------------------------------------------------------------
--- [박나림] member, member_profile_history
--- [최보경] content
--- [조수민] subscription_plan
+
 -- [이태영] subscription
--- [곽성은] watch_history  /  billing 지원
--- [하지수] billing
--- ------------------------------------------------------------
+INSERT INTO subscription (member_id, plan_id, start_date, end_date, region_snapshot, status) VALUES
+(1, 2, '2026-01-01', NULL, 'Seoul', 'active'),
+(2, 3, '2026-01-02', NULL, 'Busan', 'active'),
+(3, 1, '2026-01-03', NULL, 'Incheon', 'active'),
+(4, 2, '2026-01-04', NULL, 'Daegu', 'active'),
+(5, 4, '2026-01-05', NULL, 'Gwangju', 'active'),
+(6, 1, '2026-01-06', NULL, 'Seoul', 'active'),
+(7, 3, '2026-01-07', NULL, 'Busan', 'active'),
+(8, 2, '2026-01-08', NULL, 'Seoul', 'active'),
+(9, 2, '2026-01-09', NULL, 'Daejeon', 'active'),
+(10, 4, '2026-01-10', NULL, 'Seoul', 'active');
 
+-- [곽성은] watch_history
+INSERT INTO watch_history (sub_id, content_id, watched_at, watch_duration) VALUES
+(1, 1, '2026-01-05 20:00:00', 60),
+(1, 3, '2026-01-06 21:00:00', 75),
+(2, 5, '2026-01-07 19:00:00', 90),
+(2, 13, '2026-01-08 22:00:00', 120),
+(3, 7, '2026-01-09 18:00:00', 105),
+(4, 16, '2026-01-10 20:30:00', 80),
+(5, 21, '2026-01-11 21:00:00', 95),
+(6, 1, '2026-01-12 20:00:00', 60),
+(7, 26, '2026-01-13 19:30:00', 110),
+(8, 11, '2026-01-14 22:00:00', 130),
+(9, 2, '2026-01-15 20:00:00', 70),
+(10, 5, '2026-01-16 21:30:00', 90),
+(1, 11, '2026-01-17 20:00:00', 120),
+(3, 16, '2026-01-18 19:00:00', 85),
+(5, 26, '2026-01-19 22:00:00', 95),
+(2, 7, '2026-01-20 20:30:00', 105),
+(4, 21, '2026-01-21 21:00:00', 80),
+(6, 13, '2026-01-22 19:30:00', 115),
+(7, 3, '2026-01-23 22:00:00', 75),
+(8, 1, '2026-01-24 20:00:00', 60);
 
 -- [하지수] billing
+
 INSERT INTO billing (sub_id, billing_date, applied_price, total_amount) VALUES
 (1, '2026-01-01', 9900.00, 9900.00),
 (2, '2026-01-02', 14900.00, 14900.00),
