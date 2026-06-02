@@ -1,6 +1,6 @@
 # StreamHub — 온라인 동영상 스트리밍 구독 관리 시스템
 
-이화여대 데이터베이스 팀 프로젝트 — Java + JDBC + MySQL HeatWave
+Ewha Womans University Database Team Project — Java + JDBC + MySQL HeatWave
 
 ---
 
@@ -255,19 +255,6 @@ Closes #이슈번호
 - `feature/*` → `develop` : 본인 작업 완료 후 PR, 팀원 1명 이상 리뷰
 - `develop` → `main` : PM(본인) 최종 확인 후 merge, 제출 직전에만 사용
 
----
-
-## 팀원 및 담당
-
-| 이름 | 담당 REQ | 담당 테이블 |
-|------|----------|------------|
-| 신우림 | REQ1, REQ2, REQ3, REQ11, REQ13 | `price_history` — 스키마 통합·검수, 뷰/인덱스, 보고서 취합 |
-| 박나림 | REQ9①, REQ14 | `member`, `member_profile_history` — 발표자료 제작 |
-| 최보경 | REQ5①, REQ7④, REQ9② | `content` — 데모 영상 제작 |
-| 조수민 | REQ8①, REQ12 | `subscription_plan` — 발표 |
-| 이태영 | REQ5②, REQ8② | `subscription` — 발표 |
-| 곽성은 | REQ6①, REQ7③ | `watch_history` — 발표자료 제작 |
-| 하지수 | REQ6②, REQ17, REQ18 | `billing` — .jar 빌드, 데모 영상 제작 |
 
 ---
 
