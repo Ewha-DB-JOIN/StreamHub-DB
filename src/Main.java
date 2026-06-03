@@ -1,6 +1,9 @@
 import menu.*;
 import util.DBUtil;
 
+import menu.InsertSubscriptionMenu;
+import menu.UpdateSubscriptionPlanMenu;
+
 import java.util.Scanner;
 
 

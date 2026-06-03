@@ -78,13 +78,6 @@ INSERT INTO member (name, email, birth_date, region) VALUES
 ('한소율', 'soyul@email.com', '1997-09-17', 'Daejeon'),
 ('오지우', 'jiwoo@email.com', '1994-06-28', 'Seoul');
 
--- [조수민] subscription_plan
-INSERT INTO subscription_plan (plan_name, current_price, max_devices, ads_included) VALUES
-('광고형 베이직', 9900.00, 1, TRUE),
-('스탠다드', 13900.00, 2, FALSE),
-('프리미엄', 17900.00, 4, FALSE),
-('패밀리', 21900.00, 6, FALSE);
-
 -- ------------------------------------------------------------
 -- [신우림] price_history (REQ13용, 15 tuples)
 -- plan_id 1~4 는 조수민 담당 subscription_plan 데이터 기준
@@ -116,7 +109,6 @@ INSERT INTO price_history (plan_id, old_price, new_price, valid_from, valid_to, 
 (2,  8900.00,  9900.00, '2021-01-01 00:00:00', '2022-06-01 00:00:00', '2021-01-01 09:00:00'),
 (3, 12900.00, 14900.00, '2021-01-01 00:00:00', '2022-03-01 00:00:00', '2021-01-01 09:00:00'),
 (4, 15900.00, 17900.00, '2021-01-01 00:00:00', '2022-09-01 00:00:00', '2021-01-01 09:00:00');
-
 
 -- [이태영] subscription
 INSERT INTO subscription (member_id, plan_id, start_date, end_date, region_snapshot, status) VALUES
