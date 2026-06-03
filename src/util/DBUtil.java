@@ -1,5 +1,7 @@
 package util;
 
+import config.DBConfig;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,9 +16,9 @@ import java.sql.SQLException;
  */
 public class DBUtil {
 
-    private static final String DB_URL  = "jdbc:mysql://localhost:3306/join_db?useSSL=false&serverTimezone=Asia/Seoul";
-    private static final String DB_USER = "root";
-    private static final String DB_PASS = "your_password_here";
+    private static final String DB_URL  = DBConfig.DB_URL;
+    private static final String DB_USER = DBConfig.DB_USER;
+    private static final String DB_PASS = DBConfig.DB_PASS;
 
     private static DBUtil instance;
     private Connection connection;
