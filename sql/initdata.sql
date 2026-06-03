@@ -95,6 +95,47 @@ INSERT INTO price_history (plan_id, old_price, new_price, valid_from, valid_to, 
 -- [하지수] billing
 -- ------------------------------------------------------------
 
+-- ------------------------------------------------------------
+-- [박나림] member
+-- ------------------------------------------------------------
+INSERT INTO member (member_id, name, email, birth_date, region, created_at) VALUES
+(1,  '김민준', 'minjun.kim@email.com',   '1990-03-15', 'Seoul',  '2023-01-10 09:00:00'),
+(2,  '이서연', 'seoyeon.lee@email.com',  '1995-07-22', 'Busan',  '2023-02-05 10:00:00'),
+(3,  '박지호', 'jiho.park@email.com',    '1988-11-30', 'Daegu',  '2023-03-12 11:00:00'),
+(4,  '최수아', 'sua.choi@email.com',     '1992-05-18', 'Incheon','2023-04-20 09:30:00'),
+(5,  '정도윤', 'doyun.jung@email.com',   '1998-09-05', 'Gwangju','2023-05-08 14:00:00'),
+(6,  '강하은', 'haeun.kang@email.com',   '1993-01-25', 'Daejeon','2023-06-15 10:30:00'),
+(7,  '윤시우', 'siu.yoon@email.com',     '1987-04-10', 'Seoul',  '2023-07-03 08:00:00'),
+(8,  '임나연', 'nayeon.lim@email.com',   '1996-12-03', 'Busan',  '2023-08-19 13:00:00'),
+(9,  '한준서', 'junseo.han@email.com',   '1991-08-27', 'Ulsan',  '2023-09-11 15:00:00'),
+(10, '오채원', 'chaewon.oh@email.com',   '1999-02-14', 'Seoul',  '2023-10-07 11:00:00');                                                                                (1,  '김민준', 'minjun.kim@email.com',   '1990-03-15', 'Seoul',  '2023-01-10 09:00:00'),
+
+-- ------------------------------------------------------------
+-- [박나림] member_profile_history  [REQ14]
+-- ------------------------------------------------------------
+INSERT INTO member_profile_history (member_id, field_name, old_value, new_value, changed_at) VALUES
+-- member 1: 서울 → 부산 → 인천 (2회 이사, 분석용으로 풍부하게)
+(1, 'region', 'Seoul',   'Busan',    '2024-03-01 10:00:00'),
+(1, 'region', 'Busan',   'Incheon',  '2025-01-15 09:00:00'),
+-- member 2: 부산 → 서울
+(2, 'region', 'Busan',   'Seoul',    '2024-06-10 14:00:00'),
+-- member 3: 나이(생년월일 변경 오류 수정 케이스)
+(3, 'birth_date', '1988-11-30', '1989-11-30', '2024-02-20 11:00:00'),
+-- member 4: 인천 → 대구
+(4, 'region', 'Incheon', 'Daegu',    '2024-08-05 16:00:00'),
+-- member 5: 광주 → 서울
+(5, 'region', 'Gwangju', 'Seoul',    '2024-04-18 10:30:00'),
+-- member 6: 이메일 변경
+(6, 'email', 'haeun.kang@email.com', 'haeun.kang@newmail.com', '2024-07-01 09:00:00'),
+-- member 7: 서울 → 대전
+(7, 'region', 'Seoul',   'Daejeon',  '2024-09-20 13:00:00'),
+-- member 8: 부산 → 울산
+(8, 'region', 'Busan',   'Ulsan',    '2025-02-10 10:00:00'),
+-- member 9: 울산 → 부산
+(9, 'region', 'Ulsan',   'Busan',    '2024-11-30 17:00:00'),
+-- member 10: 서울 → 광주
+(10, 'region', 'Seoul',  'Gwangju',  '2024-05-25 12:00:00');
+
 
 -- [하지수] billing
 INSERT INTO billing (sub_id, billing_date, applied_price, total_amount) VALUES
