@@ -54,6 +54,30 @@ INSERT INTO content (title, genre, release_date, unit_price, description) VALUES
 ('Your Name', 'Animation', '2016-08-26', 7.99, 'Two teenagers mysteriously swap bodies'),
 ('The First Slam Dunk', 'Animation', '2023-01-04', 7.99, 'Theatrical film based on the Slam Dunk manga');
 
+
+-- ------------------------------------------------------------
+-- [박나림] member, member_profile_history
+-- [최보경] content
+-- [조수민] subscription_plan
+-- [이태영] subscription
+-- [곽성은] watch_history  /  billing 지원
+-- [하지수] billing
+-- ------------------------------------------------------------
+
+
+-- [박나림] member
+INSERT INTO member (name, email, birth_date, region) VALUES
+('김민준', 'minjun@email.com', '1990-03-15', 'Seoul'),
+('이서연', 'seoyeon@email.com', '1995-07-22', 'Busan'),
+('박지훈', 'jihoon@email.com', '1988-11-30', 'Incheon'),
+('최수아', 'sua@email.com', '1992-05-18', 'Daegu'),
+('정예준', 'yejun@email.com', '1998-01-09', 'Gwangju'),
+('강지민', 'jimin@email.com', '1993-08-25', 'Seoul'),
+('윤하은', 'haeun@email.com', '1996-04-12', 'Busan'),
+('임도현', 'dohyeon@email.com', '1991-12-03', 'Seoul'),
+('한소율', 'soyul@email.com', '1997-09-17', 'Daejeon'),
+('오지우', 'jiwoo@email.com', '1994-06-28', 'Seoul');
+
 -- ------------------------------------------------------------
 -- [신우림] price_history (REQ13용, 15 tuples)
 -- plan_id 1~4 는 조수민 담당 subscription_plan 데이터 기준
@@ -86,58 +110,60 @@ INSERT INTO price_history (plan_id, old_price, new_price, valid_from, valid_to, 
 (3, 12900.00, 14900.00, '2021-01-01 00:00:00', '2022-03-01 00:00:00', '2021-01-01 09:00:00'),
 (4, 15900.00, 17900.00, '2021-01-01 00:00:00', '2022-09-01 00:00:00', '2021-01-01 09:00:00');
 
--- ------------------------------------------------------------
--- [박나림] member, member_profile_history
--- [최보경] content
--- [조수민] subscription_plan
 -- [이태영] subscription
--- [곽성은] watch_history  /  billing 지원
--- [하지수] billing
--- ------------------------------------------------------------
+INSERT INTO subscription (member_id, plan_id, start_date, end_date, region_snapshot, status) VALUES
+(1, 2, '2026-01-01', NULL, 'Seoul', 'active'),
+(2, 3, '2026-01-02', NULL, 'Busan', 'active'),
+(3, 1, '2026-01-03', NULL, 'Incheon', 'active'),
+(4, 2, '2026-01-04', NULL, 'Daegu', 'active'),
+(5, 4, '2026-01-05', NULL, 'Gwangju', 'active'),
+(6, 1, '2026-01-06', NULL, 'Seoul', 'active'),
+(7, 3, '2026-01-07', NULL, 'Busan', 'active'),
+(8, 2, '2026-01-08', NULL, 'Seoul', 'active'),
+(9, 2, '2026-01-09', NULL, 'Daejeon', 'active'),
+(10, 4, '2026-01-10', NULL, 'Seoul', 'active');
 
--- ------------------------------------------------------------
--- [박나림] member
--- ------------------------------------------------------------
-INSERT INTO member (member_id, name, email, birth_date, region, created_at) VALUES
-(1,  '김민준', 'minjun.kim@email.com',   '1990-03-15', 'Seoul',  '2023-01-10 09:00:00'),
-(2,  '이서연', 'seoyeon.lee@email.com',  '1995-07-22', 'Busan',  '2023-02-05 10:00:00'),
-(3,  '박지호', 'jiho.park@email.com',    '1988-11-30', 'Daegu',  '2023-03-12 11:00:00'),
-(4,  '최수아', 'sua.choi@email.com',     '1992-05-18', 'Incheon','2023-04-20 09:30:00'),
-(5,  '정도윤', 'doyun.jung@email.com',   '1998-09-05', 'Gwangju','2023-05-08 14:00:00'),
-(6,  '강하은', 'haeun.kang@email.com',   '1993-01-25', 'Daejeon','2023-06-15 10:30:00'),
-(7,  '윤시우', 'siu.yoon@email.com',     '1987-04-10', 'Seoul',  '2023-07-03 08:00:00'),
-(8,  '임나연', 'nayeon.lim@email.com',   '1996-12-03', 'Busan',  '2023-08-19 13:00:00'),
-(9,  '한준서', 'junseo.han@email.com',   '1991-08-27', 'Ulsan',  '2023-09-11 15:00:00'),
-(10, '오채원', 'chaewon.oh@email.com',   '1999-02-14', 'Seoul',  '2023-10-07 11:00:00');                                                                                (1,  '김민준', 'minjun.kim@email.com',   '1990-03-15', 'Seoul',  '2023-01-10 09:00:00'),
+-- [곽성은] watch_history
+INSERT INTO watch_history (sub_id, content_id, watched_at, watch_duration) VALUES
+(1, 1, '2026-01-05 20:00:00', 60),
+(1, 3, '2026-01-06 21:00:00', 75),
+(2, 5, '2026-01-07 19:00:00', 90),
+(2, 13, '2026-01-08 22:00:00', 120),
+(3, 7, '2026-01-09 18:00:00', 105),
+(4, 16, '2026-01-10 20:30:00', 80),
+(5, 21, '2026-01-11 21:00:00', 95),
+(6, 1, '2026-01-12 20:00:00', 60),
+(7, 26, '2026-01-13 19:30:00', 110),
+(8, 11, '2026-01-14 22:00:00', 130),
+(9, 2, '2026-01-15 20:00:00', 70),
+(10, 5, '2026-01-16 21:30:00', 90),
+(1, 11, '2026-01-17 20:00:00', 120),
+(3, 16, '2026-01-18 19:00:00', 85),
+(5, 26, '2026-01-19 22:00:00', 95),
+(2, 7, '2026-01-20 20:30:00', 105),
+(4, 21, '2026-01-21 21:00:00', 80),
+(6, 13, '2026-01-22 19:30:00', 115),
+(7, 3, '2026-01-23 22:00:00', 75),
+(8, 1, '2026-01-24 20:00:00', 60);
 
 -- ------------------------------------------------------------
 -- [박나림] member_profile_history  [REQ14]
 -- ------------------------------------------------------------
 INSERT INTO member_profile_history (member_id, field_name, old_value, new_value, changed_at) VALUES
--- member 1: 서울 → 부산 → 인천 (2회 이사, 분석용으로 풍부하게)
 (1, 'region', 'Seoul',   'Busan',    '2024-03-01 10:00:00'),
 (1, 'region', 'Busan',   'Incheon',  '2025-01-15 09:00:00'),
--- member 2: 부산 → 서울
 (2, 'region', 'Busan',   'Seoul',    '2024-06-10 14:00:00'),
--- member 3: 나이(생년월일 변경 오류 수정 케이스)
 (3, 'birth_date', '1988-11-30', '1989-11-30', '2024-02-20 11:00:00'),
--- member 4: 인천 → 대구
 (4, 'region', 'Incheon', 'Daegu',    '2024-08-05 16:00:00'),
--- member 5: 광주 → 서울
 (5, 'region', 'Gwangju', 'Seoul',    '2024-04-18 10:30:00'),
--- member 6: 이메일 변경
 (6, 'email', 'haeun.kang@email.com', 'haeun.kang@newmail.com', '2024-07-01 09:00:00'),
--- member 7: 서울 → 대전
 (7, 'region', 'Seoul',   'Daejeon',  '2024-09-20 13:00:00'),
--- member 8: 부산 → 울산
 (8, 'region', 'Busan',   'Ulsan',    '2025-02-10 10:00:00'),
--- member 9: 울산 → 부산
 (9, 'region', 'Ulsan',   'Busan',    '2024-11-30 17:00:00'),
--- member 10: 서울 → 광주
 (10, 'region', 'Seoul',  'Gwangju',  '2024-05-25 12:00:00');
 
-
 -- [하지수] billing
+
 INSERT INTO billing (sub_id, billing_date, applied_price, total_amount) VALUES
 (1, '2026-01-01', 9900.00, 9900.00),
 (2, '2026-01-02', 14900.00, 14900.00),
