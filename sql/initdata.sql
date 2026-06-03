@@ -146,6 +146,22 @@ INSERT INTO watch_history (sub_id, content_id, watched_at, watch_duration) VALUE
 (7, 3, '2026-01-23 22:00:00', 75),
 (8, 1, '2026-01-24 20:00:00', 60);
 
+-- ------------------------------------------------------------
+-- [박나림] member_profile_history  [REQ14]
+-- ------------------------------------------------------------
+INSERT INTO member_profile_history (member_id, field_name, old_value, new_value, changed_at) VALUES
+(1, 'region', 'Seoul',   'Busan',    '2024-03-01 10:00:00'),
+(1, 'region', 'Busan',   'Incheon',  '2025-01-15 09:00:00'),
+(2, 'region', 'Busan',   'Seoul',    '2024-06-10 14:00:00'),
+(3, 'birth_date', '1988-11-30', '1989-11-30', '2024-02-20 11:00:00'),
+(4, 'region', 'Incheon', 'Daegu',    '2024-08-05 16:00:00'),
+(5, 'region', 'Gwangju', 'Seoul',    '2024-04-18 10:30:00'),
+(6, 'email', 'haeun.kang@email.com', 'haeun.kang@newmail.com', '2024-07-01 09:00:00'),
+(7, 'region', 'Seoul',   'Daejeon',  '2024-09-20 13:00:00'),
+(8, 'region', 'Busan',   'Ulsan',    '2025-02-10 10:00:00'),
+(9, 'region', 'Ulsan',   'Busan',    '2024-11-30 17:00:00'),
+(10, 'region', 'Seoul',  'Gwangju',  '2024-05-25 12:00:00');
+
 -- [하지수] billing
 
 INSERT INTO billing (sub_id, billing_date, applied_price, total_amount) VALUES
