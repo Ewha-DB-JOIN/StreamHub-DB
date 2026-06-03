@@ -64,6 +64,18 @@ INSERT INTO content (title, genre, release_date, unit_price, description) VALUES
 -- [하지수] billing
 -- ------------------------------------------------------------
 
+-- [조수민] subscription_plan
+INSERT INTO subscription_plan (plan_name, current_price, max_devices, ads_included, description) VALUES
+('광고형 베이직',         9900.00, 1, TRUE,  '광고 포함 개인용 요금제'),
+('스탠다드',             15900.00, 2, FALSE, '2대 동시 시청 가능'),
+('프리미엄',             19900.00, 4, FALSE, '광고 없는 프리미엄 요금제'),
+('패밀리',               24900.00, 6, FALSE, '가족 공유 요금제'),
+('배민클럽 X 티빙',       4900.00, 1, TRUE,  '배민클럽 연동 구독'),
+('네이버플러스 X 티빙',   4900.00, 1, TRUE,  '네이버플러스 멤버십 연동'),
+('LG U+ 결합형',          9900.00, 2, FALSE, 'LG U+ 고객 전용'),
+('KT OTT 결합형',         9900.00, 2, FALSE, 'KT 고객 전용'),
+('학생 할인형',            6900.00, 1, TRUE,  '학생 대상 할인'),
+('모바일 전용',            4900.00, 1, TRUE,  '모바일 시청 전용');
 
 -- [박나림] member
 INSERT INTO member (name, email, birth_date, region) VALUES
