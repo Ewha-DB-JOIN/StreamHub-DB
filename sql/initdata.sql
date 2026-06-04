@@ -64,6 +64,18 @@ INSERT INTO content (title, genre, release_date, unit_price, description) VALUES
 -- [하지수] billing
 -- ------------------------------------------------------------
 
+-- [조수민] subscription_plan
+INSERT INTO subscription_plan (plan_name, current_price, max_devices, ads_included, description) VALUES
+('광고형 베이직',         9900.00, 1, TRUE,  '광고 포함 개인용 요금제'),
+('스탠다드',             15900.00, 2, FALSE, '2대 동시 시청 가능'),
+('프리미엄',             19900.00, 4, FALSE, '광고 없는 프리미엄 요금제'),
+('패밀리',               24900.00, 6, FALSE, '가족 공유 요금제'),
+('배민클럽 X 티빙',       4900.00, 1, TRUE,  '배민클럽 연동 구독'),
+('네이버플러스 X 티빙',   4900.00, 1, TRUE,  '네이버플러스 멤버십 연동'),
+('LG U+ 결합형',          9900.00, 2, FALSE, 'LG U+ 고객 전용'),
+('KT OTT 결합형',         9900.00, 2, FALSE, 'KT 고객 전용'),
+('학생 할인형',            6900.00, 1, TRUE,  '학생 대상 할인'),
+('모바일 전용',            4900.00, 1, TRUE,  '모바일 시청 전용');
 
 -- [박나림] member
 INSERT INTO member (name, email, birth_date, region) VALUES
@@ -77,13 +89,6 @@ INSERT INTO member (name, email, birth_date, region) VALUES
 ('임도현', 'dohyeon@email.com', '1991-12-03', 'Seoul'),
 ('한소율', 'soyul@email.com', '1997-09-17', 'Daejeon'),
 ('오지우', 'jiwoo@email.com', '1994-06-28', 'Seoul');
-
--- [조수민] subscription_plan
-INSERT INTO subscription_plan (plan_name, current_price, max_devices, ads_included) VALUES
-('광고형 베이직', 9900.00, 1, TRUE),
-('스탠다드', 13900.00, 2, FALSE),
-('프리미엄', 17900.00, 4, FALSE),
-('패밀리', 21900.00, 6, FALSE);
 
 -- ------------------------------------------------------------
 -- [신우림] price_history (REQ13용, 15 tuples)
@@ -116,7 +121,6 @@ INSERT INTO price_history (plan_id, old_price, new_price, valid_from, valid_to, 
 (2,  8900.00,  9900.00, '2021-01-01 00:00:00', '2022-06-01 00:00:00', '2021-01-01 09:00:00'),
 (3, 12900.00, 14900.00, '2021-01-01 00:00:00', '2022-03-01 00:00:00', '2021-01-01 09:00:00'),
 (4, 15900.00, 17900.00, '2021-01-01 00:00:00', '2022-09-01 00:00:00', '2021-01-01 09:00:00');
-
 
 -- [이태영] subscription
 INSERT INTO subscription (member_id, plan_id, start_date, end_date, region_snapshot, status) VALUES
@@ -153,6 +157,22 @@ INSERT INTO watch_history (sub_id, content_id, watched_at, watch_duration) VALUE
 (6, 13, '2026-01-22 19:30:00', 115),
 (7, 3, '2026-01-23 22:00:00', 75),
 (8, 1, '2026-01-24 20:00:00', 60);
+
+-- ------------------------------------------------------------
+-- [박나림] member_profile_history  [REQ14]
+-- ------------------------------------------------------------
+INSERT INTO member_profile_history (member_id, field_name, old_value, new_value, changed_at) VALUES
+(1, 'region', 'Seoul',   'Busan',    '2024-03-01 10:00:00'),
+(1, 'region', 'Busan',   'Incheon',  '2025-01-15 09:00:00'),
+(2, 'region', 'Busan',   'Seoul',    '2024-06-10 14:00:00'),
+(3, 'birth_date', '1988-11-30', '1989-11-30', '2024-02-20 11:00:00'),
+(4, 'region', 'Incheon', 'Daegu',    '2024-08-05 16:00:00'),
+(5, 'region', 'Gwangju', 'Seoul',    '2024-04-18 10:30:00'),
+(6, 'email', 'haeun.kang@email.com', 'haeun.kang@newmail.com', '2024-07-01 09:00:00'),
+(7, 'region', 'Seoul',   'Daejeon',  '2024-09-20 13:00:00'),
+(8, 'region', 'Busan',   'Ulsan',    '2025-02-10 10:00:00'),
+(9, 'region', 'Ulsan',   'Busan',    '2024-11-30 17:00:00'),
+(10, 'region', 'Seoul',  'Gwangju',  '2024-05-25 12:00:00');
 
 -- [하지수] billing
 

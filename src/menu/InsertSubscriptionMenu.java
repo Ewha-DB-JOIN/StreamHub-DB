@@ -6,14 +6,24 @@ import java.util.Scanner;
 
 public class InsertSubscriptionMenu {
 
-    public void execute() {
-        Scanner sc = new Scanner(System.in);
-
+    public void run(Scanner scanner) {
         System.out.print("member_id 입력: ");
-        int memberId = sc.nextInt();
+        int memberId;
+        int planId;
+        try {
+            memberId = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자를 입력해주세요.");
+            return;
+        }
 
         System.out.print("plan_id 입력: ");
-        int planId = sc.nextInt();
+        try {
+            planId = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자를 입력해주세요.");
+            return;
+        }
 
         Connection conn = null;
 
