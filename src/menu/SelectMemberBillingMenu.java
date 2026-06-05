@@ -17,12 +17,13 @@ public class SelectMemberBillingMenu {
     public void run(Scanner scanner) {
         System.out.print("조회할 회원 ID를 입력하세요: ");
 
-        while (!scanner.hasNextInt()) {
-            scanner.next();
-            System.out.print("숫자를 입력하세요: ");
+        int memberId;
+        try {
+            memberId = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자를 입력해주세요.");
+            return;
         }
-
-        int memberId = scanner.nextInt();
 
         String sql =
                 "SELECT member_id, name, email, sub_id, plan_name, start_date, end_date, " +

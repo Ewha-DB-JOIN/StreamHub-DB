@@ -17,9 +17,10 @@ public class SelectGenreWatchMenu {
         System.out.println("\n=== [SELECT④] 장르별 평균 시청시간 및 콘텐츠 수 ===");
 
         // 1. 장르 입력 (필수)
+        printAvailableGenres();
         String genre;
         while (true) {
-            System.out.print("조회할 장르 (예: Drama, Action): ");
+            System.out.print("조회할 장르: ");
             genre = scanner.nextLine().trim();
             if (!genre.isEmpty()) break;
             System.out.println("장르는 필수 입력입니다. 다시 입력하세요.");
@@ -64,6 +65,24 @@ public class SelectGenreWatchMenu {
 
         } catch (SQLException e) {
             System.out.println("[오류] 조회 중 문제가 발생했습니다: " + e.getMessage());
+        }
+    }
+
+    private void printAvailableGenres() {
+        String sql = "SELECT DISTINCT genre FROM content ORDER BY genre";
+        try (PreparedStatement pstmt =
+                     DBUtil.getInstance().getConnection().prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            StringBuilder sb = new StringBuilder("사용 가능한 장르: ");
+            boolean first = true;
+            while (rs.next()) {
+                if (!first) sb.append(", ");
+                sb.append(rs.getString("genre"));
+                first = false;
+            }
+            System.out.println(sb);
+        } catch (SQLException e) {
+            // 장르 목록 조회 실패 시 무시
         }
     }
 }
