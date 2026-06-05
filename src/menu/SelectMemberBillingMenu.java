@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 public class SelectMemberBillingMenu {
 
     public void run(Scanner scanner) {
+        MenuHelper.printMemberList();
         System.out.print("조회할 회원 ID를 입력하세요: ");
 
         int memberId;

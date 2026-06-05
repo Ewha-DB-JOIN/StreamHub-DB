@@ -12,6 +12,7 @@ public class AnalyzeMemberProfileMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== [REQ14] 회원 인적사항 변경 전후 매출 분석 ===");
+        MenuHelper.printMemberList();
         System.out.print("분석할 회원 ID 입력: ");
 
         int memberId;

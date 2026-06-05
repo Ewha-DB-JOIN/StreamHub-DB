@@ -24,10 +24,8 @@ public class InsertContentMenu {
             System.out.println("제목은 필수 입력입니다. 다시 입력하세요.");
         }
 
-        // 2. 장르 (선택)
-        System.out.print("장르 (예: Action, Drama / 없으면 Enter): ");
-        String genre = scanner.nextLine().trim();
-        if (genre.isEmpty()) genre = null;
+        // 2. 장르 (선택, 번호 선택)
+        String genre = MenuHelper.selectOptionalGenre(scanner);
 
         // 3. 출시일 (선택, YYYY-MM-DD)
         String releaseDate;
@@ -42,10 +40,10 @@ public class InsertContentMenu {
             System.out.println("날짜 형식이 올바르지 않습니다. (예: 2024-01-15)");
         }
 
-        // 4. 단가 (필수, 0 이상)
+        // 4. 단가 (필수, 0 이상, 원 단위 정수)
         double unitPrice;
         while (true) {
-            System.out.print("단가: ");
+            System.out.print("단가(원, 쉼표 없이 숫자만 / 예: 9900): ");
             String priceInput = scanner.nextLine().trim();
             try {
                 unitPrice = Double.parseDouble(priceInput);

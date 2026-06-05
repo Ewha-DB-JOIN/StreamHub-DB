@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class InsertSubscriptionMenu {
 
     public void run(Scanner scanner) {
+        MenuHelper.printMemberList();
         System.out.print("member_id 입력: ");
         int memberId;
         int planId;

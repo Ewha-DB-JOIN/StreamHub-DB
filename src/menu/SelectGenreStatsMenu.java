@@ -16,9 +16,7 @@ public class SelectGenreStatsMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== SELECT① 장르별 시청 통계 조회 ===");
-        printAvailableGenres();
-        System.out.print("장르를 입력하세요: ");
-        String genre = scanner.nextLine().trim();
+        String genre = MenuHelper.selectGenre(scanner);
 
         String sql = """
                 SELECT
@@ -69,21 +67,4 @@ public class SelectGenreStatsMenu {
         }
     }
 
-    private void printAvailableGenres() {
-        String sql = "SELECT DISTINCT genre FROM content ORDER BY genre";
-        try (Connection conn = DBUtil.getInstance().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-            StringBuilder sb = new StringBuilder("사용 가능한 장르: ");
-            boolean first = true;
-            while (rs.next()) {
-                if (!first) sb.append(", ");
-                sb.append(rs.getString("genre"));
-                first = false;
-            }
-            System.out.println(sb);
-        } catch (SQLException e) {
-            // 장르 목록 조회 실패 시 무시
-        }
-    }
 }

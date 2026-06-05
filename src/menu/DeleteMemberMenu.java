@@ -12,6 +12,7 @@ public class DeleteMemberMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== [REQ9] 회원 탈퇴 처리 ===");
+        MenuHelper.printMemberList();
         System.out.print("탈퇴할 회원 ID 입력: ");
 
         int memberId;

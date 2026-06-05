@@ -9,6 +9,7 @@ public class UpdateSubscriptionPlanMenu {
     public void run(Scanner scanner) {
         int subId;
         int newPlanId;
+        MenuHelper.printSubscriptionList();
         System.out.print("sub_id 입력: ");
         try {
             subId = Integer.parseInt(scanner.nextLine().trim());

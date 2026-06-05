@@ -15,6 +15,7 @@ public class AnalyzePriceHistoryMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== [분석①] 플랜 가격 변동 전후 매출 비교 ===");
+        printPlans();
 
         // 1. 플랜 ID 입력
         int planId;
@@ -101,6 +102,23 @@ public class AnalyzePriceHistoryMenu {
 
         } catch (SQLException e) {
             System.out.println("[오류] 분석 중 문제가 발생했습니다: " + e.getMessage());
+        }
+    }
+
+    private void printPlans() {
+        String sql = "SELECT plan_id, plan_name, current_price FROM subscription_plan ORDER BY plan_id";
+        try (Connection conn = DBUtil.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            System.out.println("[구독 플랜 목록]");
+            while (rs.next()) {
+                System.out.printf("  [%d] %s — %,.0f원%n",
+                        rs.getInt("plan_id"),
+                        rs.getString("plan_name"),
+                        rs.getDouble("current_price"));
+            }
+        } catch (SQLException e) {
+            // ignore
         }
     }
 
