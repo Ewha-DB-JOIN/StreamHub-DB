@@ -66,9 +66,9 @@ public class AnalyzePriceHistoryMenu {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 System.out.println();
-                System.out.printf("%-6s %-12s %-12s %-22s %-22s %-8s %-14s%n",
-                        "구간", "이전 가격", "변경 가격", "적용 시작", "적용 종료", "결제 건수", "구간 총 매출");
-                System.out.println("-".repeat(100));
+                System.out.printf("%-4s %-12s %-12s %-22s %-22s %-8s %-14s%n",
+                        "구간", "이전 가격(원)", "변경 가격(원)", "적용 시작", "적용 종료", "결제건수", "구간 총 매출");
+                System.out.println("-".repeat(98));
 
                 int seq = 1;
                 long grandTotal = 0;
@@ -81,10 +81,10 @@ public class AnalyzePriceHistoryMenu {
 
                     String validTo = rs.getString("valid_to");
 
-                    System.out.printf("%-6d %-12.0f %-12.0f %-22s %-22s %-8d %-14s%n",
+                    System.out.printf("%-4d %-12s %-12s %-22s %-22s %-8d %-14s%n",
                             seq++,
-                            rs.getDouble("old_price"),
-                            rs.getDouble("new_price"),
+                            String.format("%,d", rs.getLong("old_price")),
+                            String.format("%,d", rs.getLong("new_price")),
                             rs.getString("valid_from"),
                             validTo == null ? "(현재)" : validTo,
                             rs.getInt("billing_count"),
@@ -96,7 +96,7 @@ public class AnalyzePriceHistoryMenu {
                     return;
                 }
 
-                System.out.println("-".repeat(100));
+                System.out.println("-".repeat(98));
                 System.out.printf("%-80s %,d 원%n", "전체 누적 매출:", grandTotal);
             }
 

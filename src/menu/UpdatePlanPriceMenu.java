@@ -16,7 +16,7 @@ public class UpdatePlanPriceMenu {
 
     public void run(Scanner sc) {
 
-        System.out.println("\n=== [UPDATE①] 플랜 가격 변경 (조수민) ===");
+        System.out.println("\n=== [UPDATE①] 플랜 가격 변경 ===");
         printPlans();
         System.out.print("변경할 플랜 ID(plan_id) 입력: ");
         int planId;
