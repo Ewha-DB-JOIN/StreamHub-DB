@@ -27,11 +27,12 @@ public class SelectMemberBillingMenu {
         }
 
         String sql =
-                "SELECT member_id, name, email, sub_id, plan_name, start_date, end_date, " +
-                "status, region_snapshot, total_billed " +
-                "FROM member_billing_summary_view " +
-                "WHERE member_id = ? " +
-                "ORDER BY sub_id";
+                "SELECT v.member_id, v.name, v.email, v.sub_id, v.plan_name, " +
+                "v.start_date, v.end_date, v.status, v.region_snapshot, v.total_billed " +
+                "FROM member_billing_summary_view v " +
+                "JOIN member m ON v.member_id = m.member_id " +
+                "WHERE v.member_id = ? " +
+                "ORDER BY v.sub_id";
 
         try (
                 Connection conn = DBUtil.getInstance().getConnection();
