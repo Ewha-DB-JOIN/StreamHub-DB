@@ -28,35 +28,111 @@ Ewha Womans University Database Team Project — Java + JDBC + MySQL
 
 ## 실행 방법
 
-### 1. DB 연결 설정
+> **실행 시연은 2026-06-11 발표 시간에 진행합니다.**  
+> 제출된 `join-app.jar`는 팀 로컬 환경 기준으로 빌드되었습니다.  
+> 직접 실행하려면 아래 순서대로 DB를 설정한 후 JAR를 재빌드해야 합니다.
 
-`src/config/DBConfig.java` 파일에서 본인 환경에 맞게 수정하세요:
+---
+
+### 1. 사전 요구사항
+
+| 항목 | 버전 |
+|------|------|
+| JDK | 17 이상 (`java -version` 으로 확인) |
+| MySQL | 8.x 또는 9.x |
+| MySQL CLI 또는 Workbench | 스키마 초기화용 |
+
+---
+
+### 2. DB 연결 설정
+
+`src/config/DBConfig.java`를 본인 MySQL 환경에 맞게 수정하세요:
 
 ```java
-public static final String DB_URL  = "jdbc:mysql://<HOST>:3306/<DB명>?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true";
-public static final String DB_USER = "your_mysql_user";
+public static final String DB_URL  = "jdbc:mysql://<HOST>:3306/<DB명>"
+                                    + "?useSSL=false"
+                                    + "&serverTimezone=Asia/Seoul"
+                                    + "&allowPublicKeyRetrieval=true";
+public static final String DB_USER = "your_mysql_user";   // 예: root
 public static final String DB_PASS = "your_mysql_password";
 ```
 
-> ⚠ `DBConfig.java`는 `.gitignore`에 포함되어 있습니다. 비밀번호를 커밋하지 마세요.
-
-### 2. DB 스키마 초기화
-
-MySQL CLI 또는 Workbench에서 **반드시 아래 순서대로** 실행하세요:
-
-```sql
-source sql/dropschema.sql;    -- ① 기존 테이블 삭제 (⚠ 데이터 전부 삭제됨)
-source sql/createschema.sql;  -- ② 테이블 / 뷰 / 인덱스 생성
-source sql/initdata.sql;      -- ③ 초기 데이터 삽입
+**로컬 MySQL 예시:**
+```java
+DB_URL  = "jdbc:mysql://localhost:3306/streamhub?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true";
+DB_USER = "root";
+DB_PASS = "your_password";
 ```
 
-> ⚠ SQL 파일에 `USE DATABASE` 구문이 없으므로, 실행 전 MySQL에서 직접 사용할 DB를 선택하세요:
-> ```sql
-> CREATE DATABASE IF NOT EXISTS streamhub;
-> USE streamhub;
+> ⚠ `DBConfig.java`는 `.gitignore`에 포함되어 있어 저장소에 커밋되지 않습니다.
+
+---
+
+### 3. DB 스키마 초기화
+
+MySQL CLI에서 **반드시 아래 순서대로** 실행하세요:
+
+```sql
+-- 먼저 DB 생성 및 선택
+CREATE DATABASE IF NOT EXISTS streamhub;
+USE streamhub;
+
+-- 순서대로 실행
+source sql/dropschema.sql;    -- ① 기존 테이블 삭제 (⚠ 데이터 전부 삭제됨)
+source sql/createschema.sql;  -- ② 테이블 8개 / 뷰 2개 / 인덱스 7개 생성
+source sql/initdata.sql;      -- ③ 초기 데이터 삽입 (각 테이블 10개 이상)
+```
+
+> ⚠ SQL 파일에 `USE DATABASE` 구문이 없으므로, `USE streamhub;` 실행 후 진행하세요.
+
+**정상 초기화 확인:**
+```sql
+SHOW TABLES;
+-- 출력: 8개 테이블 (member, content, subscription_plan, subscription,
+--               watch_history, billing, price_history, member_profile_history)
+
+SELECT COUNT(*) FROM member;          -- 20 이상
+SELECT COUNT(*) FROM subscription;    -- 30 이상
+SELECT COUNT(*) FROM billing;         -- 30 이상
+```
+
+---
+
+### 4. JAR 재빌드 (DBConfig 수정 후 필수)
+
+DBConfig.java를 수정했다면 반드시 JAR를 재빌드해야 합니다:
+
+```bash
+# 프로젝트 루트에서 실행
+mkdir -p out
+
+# 컴파일
+javac -cp lib/mysql-connector-j-8.0.33.jar \
+      -d out \
+      src/config/DBConfig.java \
+      src/util/DBUtil.java \
+      src/menu/*.java \
+      src/Main.java
+
+# Fat JAR 생성
+mkdir -p out_fat
+cd out_fat
+jar xf ../lib/mysql-connector-j-8.0.33.jar
+cd ..
+cp -r out/* out_fat/
+
+jar cfm join-app.jar manifest.txt -C out_fat .
+```
+
+> `manifest.txt` 내용:
+> ```
+> Manifest-Version: 1.0
+> Main-Class: Main
 > ```
 
-### 3. 애플리케이션 실행
+---
+
+### 5. 애플리케이션 실행
 
 **JAR 파일 실행 (권장):**
 
@@ -64,11 +140,22 @@ source sql/initdata.sql;      -- ③ 초기 데이터 삽입
 java -jar join-app.jar
 ```
 
-`join-app.jar`는 MySQL Connector/J가 포함된 Fat JAR입니다. 별도 classpath 설정이 필요 없습니다.
+`join-app.jar`는 MySQL Connector/J 8.0.33이 포함된 Fat JAR입니다. 별도 classpath 설정이 필요 없습니다.
 
 **IDE에서 실행:**
 
 `src/Main.java`를 메인 클래스로 직접 실행하세요. classpath에 `lib/mysql-connector-j-8.0.33.jar`를 추가해야 합니다.
+
+---
+
+### 6. 연결 오류 시 확인사항
+
+| 오류 메시지 | 원인 | 해결 |
+|------------|------|------|
+| `Communications link failure` | DB 서버 미실행 또는 HOST 오류 | MySQL 서버 실행 확인, DB_URL 확인 |
+| `Access denied for user` | 아이디/비밀번호 오류 | DB_USER, DB_PASS 확인 |
+| `Unknown database 'streamhub'` | DB 미생성 | `CREATE DATABASE streamhub;` 실행 |
+| `Table doesn't exist` | 스키마 초기화 미실행 | 3단계 SQL 스크립트 실행 |
 
 ---
 
