@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class InsertSubscriptionMenu {
 
     public void run(Scanner scanner) {
+        MenuHelper.printMemberList();
         System.out.print("member_id 입력: ");
         int memberId;
         int planId;
@@ -17,6 +18,7 @@ public class InsertSubscriptionMenu {
             return;
         }
 
+        printPlans();
         System.out.print("plan_id 입력: ");
         try {
             planId = Integer.parseInt(scanner.nextLine().trim());
@@ -76,6 +78,23 @@ public class InsertSubscriptionMenu {
             System.out.println("오류 내용: " + e.getMessage());
         } finally {
             close(conn);
+        }
+    }
+
+    private void printPlans() {
+        String sql = "SELECT plan_id, plan_name, current_price FROM subscription_plan ORDER BY plan_id";
+        try (Connection conn = DBUtil.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            System.out.println("[구독 플랜 목록]");
+            while (rs.next()) {
+                System.out.printf("  [%d] %s — %,.0f원%n",
+                        rs.getInt("plan_id"),
+                        rs.getString("plan_name"),
+                        rs.getDouble("current_price"));
+            }
+        } catch (SQLException e) {
+            // 목록 조회 실패 시 무시
         }
     }
 

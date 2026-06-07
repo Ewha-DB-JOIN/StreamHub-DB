@@ -8,6 +8,18 @@
 -- ※ FK 의존성 순서: member → content → subscription_plan
 --                  → subscription → watch_history / billing / price_history / member_profile_history
 
+
+
+
+-- ------------------------------------------------------------
+-- [박나림] member, member_profile_history -> 완료
+-- [최보경] content -> 완료
+-- [조수민] subscription_plan
+-- [이태영] subscription
+-- [곽성은] watch_history  /  billing 지원
+-- [하지수] billing
+-- ------------------------------------------------------------
+
 -- ------------------------------------------------------------
 -- [최보경] content
 -- ------------------------------------------------------------
@@ -55,15 +67,6 @@ INSERT INTO content (title, genre, release_date, unit_price, description) VALUES
 ('The First Slam Dunk', 'Animation', '2023-01-04', 7.99, 'Theatrical film based on the Slam Dunk manga');
 
 
--- ------------------------------------------------------------
--- [박나림] member, member_profile_history
--- [최보경] content
--- [조수민] subscription_plan
--- [이태영] subscription
--- [곽성은] watch_history  /  billing 지원
--- [하지수] billing
--- ------------------------------------------------------------
-
 -- [조수민] subscription_plan
 INSERT INTO subscription_plan (plan_name, current_price, max_devices, ads_included, description) VALUES
 ('광고형 베이직',         9900.00, 1, TRUE,  '광고 포함 개인용 요금제'),
@@ -88,7 +91,18 @@ INSERT INTO member (name, email, birth_date, region) VALUES
 ('윤하은', 'haeun@email.com', '1996-04-12', 'Busan'),
 ('임도현', 'dohyeon@email.com', '1991-12-03', 'Seoul'),
 ('한소율', 'soyul@email.com', '1997-09-17', 'Daejeon'),
-('오지우', 'jiwoo@email.com', '1994-06-28', 'Seoul');
+('오지우', 'jiwoo@email.com', '1994-06-28', 'Seoul'),
+-- 추가 회원 (member_id 11~20)
+('서현우', 'hyunwoo@email.com',  '1993-02-14', 'Seoul'),
+('김다은', 'daeun@email.com',    '1999-06-03', 'Busan'),
+('이준혁', 'junhyuk@email.com',  '1987-09-22', 'Seoul'),
+('박소영', 'soyoung@email.com',  '1996-12-08', 'Incheon'),
+('최민서', 'minseo@email.com',   '2000-04-17', 'Daegu'),
+('정우진', 'woojin@email.com',   '1994-11-29', 'Seoul'),
+('강나연', 'nayeon@email.com',   '1991-07-05', 'Gwangju'),
+('윤성민', 'seongmin@email.com', '1989-03-19', 'Busan'),
+('한지아', 'jia@email.com',      '1997-08-11', 'Seoul'),
+('오태양', 'taeyang@email.com',  '2001-01-25', 'Daejeon');
 
 -- ------------------------------------------------------------
 -- [신우림] price_history (REQ13용, 15 tuples)
@@ -133,7 +147,29 @@ INSERT INTO subscription (member_id, plan_id, start_date, end_date, region_snaps
 (7, 3, '2026-01-07', NULL, 'Busan', 'active'),
 (8, 2, '2026-01-08', NULL, 'Seoul', 'active'),
 (9, 2, '2026-01-09', NULL, 'Daejeon', 'active'),
-(10, 4, '2026-01-10', NULL, 'Seoul', 'active');
+(10, 4, '2026-01-10', NULL, 'Seoul', 'active'),
+-- 신규 회원 구독 (sub_id 11~20, member_id 11~20, 2026-01 active)
+(11, 1, '2026-01-11', NULL, 'Seoul',    'active'),
+(12, 2, '2026-01-12', NULL, 'Busan',    'active'),
+(13, 3, '2026-01-13', NULL, 'Seoul',    'active'),
+(14, 1, '2026-01-14', NULL, 'Incheon',  'active'),
+(15, 4, '2026-01-15', NULL, 'Daegu',    'active'),
+(16, 2, '2026-01-16', NULL, 'Seoul',    'active'),
+(17, 3, '2026-01-17', NULL, 'Gwangju',  'active'),
+(18, 9, '2026-01-18', NULL, 'Busan',    'active'),
+(19, 2, '2026-01-19', NULL, 'Seoul',    'active'),
+(20, 4, '2026-01-20', NULL, 'Daejeon',  'active'),
+-- 기존 회원 과거 구독 이력 (sub_id 21~30, 만료/해지, 분석 메뉴 다양성용)
+(1,  1, '2025-01-01', '2025-12-31', 'Seoul',    'expired'),
+(2,  2, '2025-02-01', '2025-12-31', 'Busan',    'expired'),
+(3,  1, '2025-03-01', '2025-11-30', 'Incheon',  'cancelled'),
+(4,  3, '2025-01-15', '2025-10-15', 'Daegu',    'expired'),
+(5,  4, '2025-06-01', '2025-12-01', 'Gwangju',  'cancelled'),
+(6,  2, '2025-04-01', '2025-12-31', 'Seoul',    'expired'),
+(7,  5, '2025-05-01', '2026-01-06', 'Busan',    'expired'),
+(8,  1, '2025-07-01', '2026-01-07', 'Seoul',    'expired'),
+(9,  3, '2025-08-01', '2025-12-31', 'Daejeon',  'expired'),
+(10, 2, '2025-09-01', '2026-01-09', 'Seoul',    'cancelled');
 
 -- [곽성은] watch_history
 INSERT INTO watch_history (sub_id, content_id, watched_at, watch_duration) VALUES
@@ -156,7 +192,38 @@ INSERT INTO watch_history (sub_id, content_id, watched_at, watch_duration) VALUE
 (4, 21, '2026-01-21 21:00:00', 80),
 (6, 13, '2026-01-22 19:30:00', 115),
 (7, 3, '2026-01-23 22:00:00', 75),
-(8, 1, '2026-01-24 20:00:00', 60);
+(8, 1, '2026-01-24 20:00:00', 60),
+-- 추가 시청 이력 (2026-01-25 ~ 2026-03-15, sub_id 1~20 커버)
+(9,  18, '2026-01-25 20:00:00',  90),
+(10, 22, '2026-01-26 19:00:00', 100),
+(11,  2, '2026-01-27 21:00:00',  75),
+(12,  8, '2026-01-28 20:30:00',  60),
+(13, 14, '2026-01-29 22:00:00', 110),
+(14, 19, '2026-01-30 19:30:00',  85),
+(15, 27, '2026-01-31 21:00:00',  95),
+(16,  4, '2026-02-01 20:00:00',  70),
+(17, 10, '2026-02-02 19:00:00', 120),
+(18, 23, '2026-02-03 22:00:00',  80),
+(19,  6, '2026-02-04 20:30:00',  60),
+(20, 12, '2026-02-05 21:00:00', 105),
+(1,  17, '2026-02-06 19:30:00',  75),
+(2,  29, '2026-02-07 22:00:00',  90),
+(3,  20, '2026-02-08 20:00:00', 115),
+(4,   9, '2026-02-09 21:00:00',  80),
+(5,  15, '2026-02-10 19:00:00',  95),
+(6,  24, '2026-02-11 20:30:00',  60),
+(7,  30, '2026-02-12 22:00:00', 100),
+(8,  25, '2026-02-13 20:00:00',  85),
+(9,   3, '2026-02-14 19:30:00',  70),
+(10, 28, '2026-02-15 21:00:00', 120),
+(11, 11, '2026-02-16 20:00:00',  90),
+(12, 16, '2026-02-17 19:00:00',  75),
+(13,  7, '2026-02-18 22:00:00', 110),
+(14,  4, '2026-03-01 20:30:00',  80),
+(15, 21, '2026-03-05 21:00:00',  95),
+(16, 13, '2026-03-08 20:00:00',  60),
+(17, 26, '2026-03-10 19:30:00', 105),
+(18,  1, '2026-03-15 22:00:00',  90);
 
 -- ------------------------------------------------------------
 -- [박나림] member_profile_history  [REQ14]

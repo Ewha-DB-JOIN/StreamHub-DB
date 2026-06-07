@@ -4,7 +4,7 @@ import util.DBUtil;
 import java.sql.*;
 import java.util.Scanner;
 
-/** 
+/**
  * [REQ8①][REQ12] UPDATE① 플랜 가격 변경
  * 담당: 조수민
  * - 플랜 ID, 새 가격 입력 → subscription_plan.current_price UPDATE
@@ -14,15 +14,27 @@ import java.util.Scanner;
  */
 public class UpdatePlanPriceMenu {
 
-  
     public void run(Scanner sc) {
 
-        System.out.println("\n=== [UPDATE①] 플랜 가격 변경 (조수민) ===");
+        System.out.println("\n=== [UPDATE①] 플랜 가격 변경 ===");
+        printPlans();
         System.out.print("변경할 플랜 ID(plan_id) 입력: ");
-        int planId = sc.nextInt();
+        int planId;
+        try {
+            planId = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자를 입력해주세요.");
+            return;
+        }
 
         System.out.print("새로운 가격 입력: ");
-        int newPrice = sc.nextInt();
+        int newPrice;
+        try {
+            newPrice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자를 입력해주세요.");
+            return;
+        }
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -31,7 +43,7 @@ public class UpdatePlanPriceMenu {
         try {
             // 1. DB 연결 및 트랜잭션 시작 (REQ12 연계)
             conn = DBUtil.getInstance().getConnection();
-            conn.setAutoCommit(false); 
+            conn.setAutoCommit(false);
 
             // 2. 플랜 존재 여부 및 기존 가격(old_price) 확인
             String checkSql = "SELECT current_price FROM subscription_plan WHERE plan_id = ?";
@@ -46,7 +58,7 @@ public class UpdatePlanPriceMenu {
             }
 
             int oldPrice = rs.getInt("current_price");
-            
+
             // 사용한 조회 자원 반납
             rs.close();
             pstmt.close();
@@ -57,12 +69,12 @@ public class UpdatePlanPriceMenu {
             pstmt.setInt(1, newPrice);
             pstmt.setInt(2, planId);
             pstmt.executeUpdate();
-            
-            pstmt.close(); // 사용 후 닫기
+
+            pstmt.close();
 
             // 4. price_history에 이력 INSERT (valid_from = NOW())
             String insertSql = """
-                    INSERT INTO price_history (plan_id, old_price, new_price, valid_from) 
+                    INSERT INTO price_history (plan_id, old_price, new_price, valid_from)
                     VALUES (?, ?, ?, NOW())
                     """;
             pstmt = conn.prepareStatement(insertSql);
@@ -92,12 +104,29 @@ public class UpdatePlanPriceMenu {
                 if (rs != null) rs.close();
                 if (pstmt != null) pstmt.close();
                 if (conn != null) {
-                    conn.setAutoCommit(true); // 오토커밋 복구
+                    conn.setAutoCommit(true);
                     conn.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void printPlans() {
+        String sql = "SELECT plan_id, plan_name, current_price FROM subscription_plan ORDER BY plan_id";
+        try (Connection conn = DBUtil.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            System.out.println("[구독 플랜 목록]");
+            while (rs.next()) {
+                System.out.printf("  [%d] %s — %,.0f원%n",
+                        rs.getInt("plan_id"),
+                        rs.getString("plan_name"),
+                        rs.getDouble("current_price"));
+            }
+        } catch (SQLException e) {
+            // 목록 조회 실패 시 무시
         }
     }
 }

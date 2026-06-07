@@ -15,6 +15,7 @@ public class AnalyzePriceHistoryMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== [분석①] 플랜 가격 변동 전후 매출 비교 ===");
+        printPlans();
 
         // 1. 플랜 ID 입력
         int planId;
@@ -65,9 +66,9 @@ public class AnalyzePriceHistoryMenu {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 System.out.println();
-                System.out.printf("%-6s %-12s %-12s %-22s %-22s %-8s %-14s%n",
-                        "구간", "이전 가격", "변경 가격", "적용 시작", "적용 종료", "결제 건수", "구간 총 매출");
-                System.out.println("-".repeat(100));
+                System.out.printf("%-4s %-12s %-12s %-22s %-22s %-8s %-14s%n",
+                        "구간", "이전 가격(원)", "변경 가격(원)", "적용 시작", "적용 종료", "결제건수", "구간 총 매출");
+                System.out.println("-".repeat(98));
 
                 int seq = 1;
                 long grandTotal = 0;
@@ -80,10 +81,10 @@ public class AnalyzePriceHistoryMenu {
 
                     String validTo = rs.getString("valid_to");
 
-                    System.out.printf("%-6d %-12.0f %-12.0f %-22s %-22s %-8d %-14s%n",
+                    System.out.printf("%-4d %-12s %-12s %-22s %-22s %-8d %-14s%n",
                             seq++,
-                            rs.getDouble("old_price"),
-                            rs.getDouble("new_price"),
+                            String.format("%,d", rs.getLong("old_price")),
+                            String.format("%,d", rs.getLong("new_price")),
                             rs.getString("valid_from"),
                             validTo == null ? "(현재)" : validTo,
                             rs.getInt("billing_count"),
@@ -95,12 +96,29 @@ public class AnalyzePriceHistoryMenu {
                     return;
                 }
 
-                System.out.println("-".repeat(100));
+                System.out.println("-".repeat(98));
                 System.out.printf("%-80s %,d 원%n", "전체 누적 매출:", grandTotal);
             }
 
         } catch (SQLException e) {
             System.out.println("[오류] 분석 중 문제가 발생했습니다: " + e.getMessage());
+        }
+    }
+
+    private void printPlans() {
+        String sql = "SELECT plan_id, plan_name, current_price FROM subscription_plan ORDER BY plan_id";
+        try (Connection conn = DBUtil.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            System.out.println("[구독 플랜 목록]");
+            while (rs.next()) {
+                System.out.printf("  [%d] %s — %,.0f원%n",
+                        rs.getInt("plan_id"),
+                        rs.getString("plan_name"),
+                        rs.getDouble("current_price"));
+            }
+        } catch (SQLException e) {
+            // ignore
         }
     }
 

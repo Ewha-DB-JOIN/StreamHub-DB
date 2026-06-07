@@ -15,6 +15,7 @@ public class DeleteContentMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== [DELETE②] 콘텐츠 삭제 ===");
+        MenuHelper.printContentList();
 
         // 1. content_id 입력 (필수, 정수)
         int contentId;

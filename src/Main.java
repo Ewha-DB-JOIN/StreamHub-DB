@@ -105,11 +105,13 @@ public class Main {
     }
 
     private static int getIntInput(String prompt) {
-        System.out.print(prompt);
-        while (!scanner.hasNextInt()) {
-            scanner.next();
-            System.out.print("숫자를 입력하세요: ");
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.print("숫자를 입력하세요: ");
+            }
         }
-        return scanner.nextInt();
     }
 }

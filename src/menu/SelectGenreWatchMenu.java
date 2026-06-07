@@ -16,14 +16,8 @@ public class SelectGenreWatchMenu {
     public void run(Scanner scanner) {
         System.out.println("\n=== [SELECT④] 장르별 평균 시청시간 및 콘텐츠 수 ===");
 
-        // 1. 장르 입력 (필수)
-        String genre;
-        while (true) {
-            System.out.print("조회할 장르 (예: Drama, Action): ");
-            genre = scanner.nextLine().trim();
-            if (!genre.isEmpty()) break;
-            System.out.println("장르는 필수 입력입니다. 다시 입력하세요.");
-        }
+        // 1. 장르 선택
+        String genre = MenuHelper.selectGenre(scanner);
 
         // 2. 집계 조회 (JOIN + GROUP BY) [REQ7]
         // content와 watch_history를 JOIN하여 장르별 평균 시청시간과 콘텐츠 수 집계
@@ -66,4 +60,5 @@ public class SelectGenreWatchMenu {
             System.out.println("[오류] 조회 중 문제가 발생했습니다: " + e.getMessage());
         }
     }
+
 }

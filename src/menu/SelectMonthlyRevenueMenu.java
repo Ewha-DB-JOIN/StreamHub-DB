@@ -16,17 +16,16 @@ public class SelectMonthlyRevenueMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== SELECT③ 월별 구독 매출 및 ARPU ===");
+        MenuHelper.printBillingYears();
 
         int year = 0;
         while (true) {
-            System.out.print("조회할 연도를 입력하세요 (예: 2024): ");
-            if (scanner.hasNextInt()) {
-                year = scanner.nextInt();
-                scanner.nextLine(); // 버퍼 비우기
+            System.out.print("조회할 연도를 입력하세요: ");
+            try {
+                year = Integer.parseInt(scanner.nextLine().trim());
                 break;
-            } else {
+            } catch (NumberFormatException e) {
                 System.out.println("숫자를 입력하세요.");
-                scanner.nextLine(); // 잘못된 입력 버리기
             }
         }
 

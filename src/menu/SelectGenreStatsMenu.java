@@ -16,9 +16,7 @@ public class SelectGenreStatsMenu {
 
     public void run(Scanner scanner) {
         System.out.println("\n=== SELECT① 장르별 시청 통계 조회 ===");
-        scanner.nextLine(); // 버퍼 비우기
-        System.out.print("장르를 입력하세요 (예: 액션, 드라마, 로맨스): ");
-        String genre = scanner.nextLine().trim();
+        String genre = MenuHelper.selectGenre(scanner);
 
         String sql = """
                 SELECT
@@ -68,4 +66,5 @@ public class SelectGenreStatsMenu {
             System.err.println("[오류] " + e.getMessage());
         }
     }
+
 }
